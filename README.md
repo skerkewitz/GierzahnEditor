@@ -15,14 +15,14 @@ Use W, A, S, D key to set airflow at the cursor position.
 Use SHIFT LMB drag to copy/paint the airflow at the current cursor position to the mouse position.
 Use SHIFT RMB drag to clear the airflow at the mouse cursor.
 
-# Enemies
+### Enemies
 E will place a enemy at the cursor position.
 F will flip the enemy at the cursor position.
 Q will remoe the enemy at the cursor position.
 
-# Misc
+### Misc
 F5 will mirror copy the left half of the map to the right halt of the map (will overwrite any solids and airflow on the right map half).
-
+You can load a backdrop as reference image if you want to recreate a map you have a picture of.
 
 ## Requirements
 * Java JDK11
