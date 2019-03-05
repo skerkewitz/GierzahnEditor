@@ -1,6 +1,8 @@
 # GierzahnEditor
 The somewhat clunky editor for [Blubber-Blasen](https://github.com/skerkewitz/blubber-blasen).
 
+![Screenshot of GierzahnEditor](https://raw.githubusercontent.com/skerkewitz/GierzahnEditor/master/doc/GierzahnEditor.png)
+
 ## How to use it
 
 ### Place and remove solid blocks
