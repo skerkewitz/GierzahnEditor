@@ -4,12 +4,12 @@ The somewhat clunky editor for [Blubber-Blasen](https://github.com/skerkewitz/bl
 ## How to use it
 
 ### Place and remove solid blocks
-Select the Solid layer in the layer tool.
+Select the *Solid* layer in the layer tool.
 * Left mouse will place solid blocks (you can also drag).
 * Right mouse button will remove solid block (you can also drag).
 
 ### Setting up airflow
-Select the airflow layer in the layer tool.
+Select the *Airflow* layer in the layer tool.
 * Use W, A, S, D key to set airflow at the cursor position.
 * Left mouse click will place the cursor.
 * The cursor can also moved with the cursor keys.
