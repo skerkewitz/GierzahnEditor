@@ -10,13 +10,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class StaticBaseMapLayerPaintComponent extends AbstractBaseMapLayerPaintComponent {
+public class StaticBaseMapLayerPaintComponent extends AbstractLayerPaintComponent {
 
   private static final Logger logger = LogManager.getLogger(StaticBaseMapLayerPaintComponent.class);
 
   private BufferedImage image;
 
   public StaticBaseMapLayerPaintComponent() {
+    super(Map.Layer.Static);
+
     try {
       image = ImageIO.read(this.getClass().getResourceAsStream("tile_32x32.png"));
     } catch (IOException e) {
@@ -29,5 +31,10 @@ public class StaticBaseMapLayerPaintComponent extends AbstractBaseMapLayerPaintC
     if (layer.getAt(x, y) == 1) {
       g.drawImage(image, x * Map.TILE_WIDTH, y * Map.TILE_HEIGHT, null);
     }
+  }
+
+  @Override
+  public String getName() {
+    return "Solid";
   }
 }

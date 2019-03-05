@@ -4,7 +4,8 @@ public class Map {
 
   public enum Layer {
     Static,
-    Airflow
+    Airflow,
+    Enemies,
   }
 
   private String name;

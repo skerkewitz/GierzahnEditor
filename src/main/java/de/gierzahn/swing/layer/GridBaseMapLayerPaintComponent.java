@@ -11,9 +11,12 @@ public class GridBaseMapLayerPaintComponent extends AbstractLayerPaintComponent 
 
   private static final Logger logger = LogManager.getLogger(GridBaseMapLayerPaintComponent.class);
 
+  public GridBaseMapLayerPaintComponent() {
+    super(null);
+  }
 
   @Override
-  public void paintComponent(Graphics g, BaseMapLayer layer) {
+  public void paintComponent(Graphics2D g, BaseMapLayer layer) {
 
     var minX = 0;
     var minY = 0;
@@ -39,5 +42,10 @@ public class GridBaseMapLayerPaintComponent extends AbstractLayerPaintComponent 
     int middelY = Map.NUM_TILES_VERTICAL / 2 * Map.TILE_HEIGHT;
     g.drawLine(minX, middelY, maxX, middelY);
 
+  }
+
+  @Override
+  public String getName() {
+    return "Grid";
   }
 }

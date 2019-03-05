@@ -1,6 +1,5 @@
 package de.gierzahn.swing;
 
-import de.gierzahn.editor.map.AirflowDirection;
 import de.gierzahn.editor.Editor;
 import de.gierzahn.swing.action.*;
 import org.apache.logging.log4j.LogManager;
@@ -8,8 +7,6 @@ import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class JMainFrame extends JFrame {
 
@@ -27,70 +24,7 @@ public class JMainFrame extends JFrame {
     setLayout(new BorderLayout());
     jEditorPanel = new JEditorPanel(editor);
     add(jEditorPanel, BorderLayout.CENTER);
-    createMenuBar();
-
-    addKeyListener(new KeyListener() {
-
-      @Override
-      public void keyTyped(KeyEvent e) {
-      }
-
-      @Override
-      public void keyReleased(KeyEvent e) {
-      }
-
-      @Override
-      public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-          case KeyEvent.VK_SPACE:
-            jEditorPanel.editor.fire();
-            break;
-          case KeyEvent.VK_E:
-            jEditorPanel.editor.placeEnemy();
-            break;
-          case KeyEvent.VK_Q:
-            jEditorPanel.editor.removeEnemy();
-            break;
-          case KeyEvent.VK_F:
-            jEditorPanel.editor.flipEnemy();
-            break;
-          case KeyEvent.VK_LEFT:
-            jEditorPanel.editor.goLeft();
-            break;
-          case KeyEvent.VK_RIGHT:
-            jEditorPanel.editor.goRight();
-            break;
-
-          case KeyEvent.VK_UP:
-            jEditorPanel.editor.goUp();
-            break;
-
-          case KeyEvent.VK_DOWN:
-            jEditorPanel.editor.goDown();
-            break;
-
-          case KeyEvent.VK_W:
-            jEditorPanel.editor.airflow(AirflowDirection.UP);
-            break;
-
-          case KeyEvent.VK_S:
-            jEditorPanel.editor.airflow(AirflowDirection.DOWN);
-            break;
-
-          case KeyEvent.VK_A:
-            jEditorPanel.editor.airflow(AirflowDirection.LEFT);
-            break;
-
-          case KeyEvent.VK_D:
-            jEditorPanel.editor.airflow(AirflowDirection.RIGHT);
-            break;
-
-          default:
-        }
-
-        jEditorPanel.repaint();
-      }
-    });
+    add(new JLayerPanel(jEditorPanel), BorderLayout.EAST);
 
     setJMenuBar(createMenuBar());
 
@@ -106,6 +40,7 @@ public class JMainFrame extends JFrame {
     JMenuBar menuBar = new JMenuBar();
     menuBar.add(createFileMenu());
     menuBar.add(createEditMenu());
+    menuBar.add(createEnemyMenu());
 
     return menuBar;
   }
@@ -114,8 +49,25 @@ public class JMainFrame extends JFrame {
     JMenu jEditMenu = new JMenu("Edit");
     jEditMenu.add(new JMenuItem(new EditMirrorYMapAction(editor)));
     jEditMenu.addSeparator();
+    jEditMenu.add(new JMenuItem(new EditAirflowUpMapAction(editor)));
+    jEditMenu.add(new JMenuItem(new EditAirflowLeftMapAction(editor)));
+    jEditMenu.add(new JMenuItem(new EditAirflowDownMapAction(editor)));
+    jEditMenu.add(new JMenuItem(new EditAirflowRightMapAction(editor)));
     jEditMenu.add(new JMenuItem(new EditAutosetAirflowMapAction(editor)));
+    jEditMenu.addSeparator();
+    jEditMenu.add(new JMenuItem(new EditCursorUpMapAction(editor)));
+    jEditMenu.add(new JMenuItem(new EditCursorLeftMapAction(editor)));
+    jEditMenu.add(new JMenuItem(new EditCursorDownMapAction(editor)));
+    jEditMenu.add(new JMenuItem(new EditCursorRightMapAction(editor)));
     return jEditMenu;
+  }
+
+  private Component createEnemyMenu() {
+    JMenu jEnemyMenu = new JMenu("Enemy");
+    jEnemyMenu.add(new JMenuItem(new EnemyPlaceEnemyAddMapAction(editor)));
+    jEnemyMenu.add(new JMenuItem(new EnemyFlipEnemyMapAction(editor)));
+    jEnemyMenu.add(new JMenuItem(new EnemyRemoveEnemyMapAction(editor)));
+    return jEnemyMenu;
   }
 
   private JMenu createFileMenu() {
@@ -133,4 +85,5 @@ public class JMainFrame extends JFrame {
     jFileMenu.add(jExitMenuItem);
     return jFileMenu;
   }
+
 }

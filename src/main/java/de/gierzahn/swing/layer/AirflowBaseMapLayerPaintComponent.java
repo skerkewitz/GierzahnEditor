@@ -1,6 +1,7 @@
 package de.gierzahn.swing.layer;
 
 import de.gierzahn.editor.map.BaseMapLayer;
+import de.gierzahn.editor.map.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,7 +13,7 @@ import java.io.IOException;
 import static de.gierzahn.editor.map.Map.TILE_HEIGHT;
 import static de.gierzahn.editor.map.Map.TILE_WIDTH;
 
-public class AirflowBaseMapLayerPaintComponent extends AbstractBaseMapLayerPaintComponent {
+public class AirflowBaseMapLayerPaintComponent extends AbstractLayerPaintComponent {
 
   private static final Logger logger = LogManager.getLogger(AirflowBaseMapLayerPaintComponent.class);
 
@@ -20,6 +21,7 @@ public class AirflowBaseMapLayerPaintComponent extends AbstractBaseMapLayerPaint
 
 
   public AirflowBaseMapLayerPaintComponent(float alpha) {
+    super(Map.Layer.Airflow);
     try {
       up = ImageIO.read(this.getClass().getResourceAsStream("up.png"));
       down = ImageIO.read(this.getClass().getResourceAsStream("down.png"));
@@ -61,5 +63,10 @@ public class AirflowBaseMapLayerPaintComponent extends AbstractBaseMapLayerPaint
     if (image != null) {
       g.drawImage(image, x * TILE_WIDTH, y * TILE_HEIGHT, null);
     }
+  }
+
+  @Override
+  public String getName() {
+    return "Airflow";
   }
 }

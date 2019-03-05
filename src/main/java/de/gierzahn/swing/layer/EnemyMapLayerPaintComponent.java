@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class EnemyMapLayerPaintComponent extends AbstractBaseMapLayerPaintComponent {
+public class EnemyMapLayerPaintComponent extends AbstractLayerPaintComponent {
 
   private static final Logger logger = LogManager.getLogger(EnemyMapLayerPaintComponent.class);
 
@@ -19,7 +19,7 @@ public class EnemyMapLayerPaintComponent extends AbstractBaseMapLayerPaintCompon
   private BufferedImage right;
 
   public EnemyMapLayerPaintComponent() {
-    super();
+    super(Map.Layer.Enemies);
     try {
       left = ImageIO.read(this.getClass().getResourceAsStream("zenchan-left-32x32.png"));
       right = ImageIO.read(this.getClass().getResourceAsStream("zenchan-right-32x32.png"));
@@ -39,5 +39,10 @@ public class EnemyMapLayerPaintComponent extends AbstractBaseMapLayerPaintCompon
       var image = enemyById.isLookingLeft ? left : right;
       g.drawImage(image, x * Map.TILE_WIDTH, y * Map.TILE_HEIGHT, Map.TILE_WIDTH * 2, Map.TILE_WIDTH * 2, null);
     }
+  }
+
+  @Override
+  public String getName() {
+    return "Enemies";
   }
 }

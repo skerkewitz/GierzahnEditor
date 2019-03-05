@@ -7,16 +7,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
-import java.io.File;
 
 public class Editor {
-
-  private static final Logger logger = LogManager.getLogger(Editor.class);
 
   public interface EditorMapChangedListener {
     void mapDidChanged();
   }
 
+  private static final Logger logger = LogManager.getLogger(Editor.class);
   public int xPos = 0;
   public int yPos = 0;
 
@@ -28,26 +26,14 @@ public class Editor {
     this.editorMapChangedListener = l;
   }
 
-  public void fire() {
-    logger.debug("Fire at xPos: " + xPos + " yPos: " + yPos);
-
-    if (map.staticMapLayer.getAt(xPos, yPos) == 0) {
-      map.staticMapLayer.setAt(xPos, yPos, 1);
-    } else {
-      map.staticMapLayer.setAt(xPos, yPos, 0);
-    }
-
-    fireMapDidChangeEvent();
-  }
-
-  public void goLeft() {
+  public void moveCursorLeft() {
     if (xPos > Map.MAX_LEFT) {
       xPos--;
       fireMapDidChangeEvent();
     }
   }
 
-  public void goRight() {
+  public void moveCursorRight() {
     if (xPos < Map.MAX_RIGHT) {
       xPos++;
       fireMapDidChangeEvent();
@@ -55,21 +41,21 @@ public class Editor {
 
   }
 
-  public void goUp() {
+  public void moveCursorUp() {
     if (yPos > Map.MAX_UP) {
       yPos--;
       fireMapDidChangeEvent();
     }
   }
 
-  public void goDown() {
+  public void moveCursorDown() {
     if (yPos < Map.MAX_DOWN) {
       yPos++;
       fireMapDidChangeEvent();
     }
   }
 
-  public void airflow(AirflowDirection direction) {
+  public void setAirflow(AirflowDirection direction) {
 
     /* Remove if the old code is the new code (toogle delete). */
     int current = map.airflowMapLayer.getAt(xPos, yPos);
@@ -85,6 +71,7 @@ public class Editor {
   public void cloneAirflowFromCursorAt(Point p) {
     int stamp = map.airflowMapLayer.getAt(xPos, yPos);
     map.airflowMapLayer.setAt(p.x, p.y, stamp);
+    fireMapDidChangeEvent();
   }
 
   public void paintAt(Point p) {
@@ -147,6 +134,7 @@ public class Editor {
     xPos = p.x;
     yPos = p.y;
     clampCursorBounds();
+    fireMapDidChangeEvent();
   }
 
   protected void clampCursorBounds() {
@@ -160,7 +148,7 @@ public class Editor {
   public void autofillAirflow() {
     /* Reset the airflow map. */
     map.airflowMapLayer.fill(0);
-    map.staticMapLayer.forEachField((x, y, v) -> map.airflowMapLayer.setAt(x, y,v == 0 ? AirflowDirection.UP.getCode() : 0));
+    map.staticMapLayer.forEachField((x, y, v) -> map.airflowMapLayer.setAt(x, y, v == 0 ? AirflowDirection.UP.getCode() : 0));
     fireMapDidChangeEvent();
   }
 
@@ -184,5 +172,9 @@ public class Editor {
     EnemyBaseMapLayer.Enemy enemy = getMap().enemyMapLayer.getEnemyById(enemyId);
     enemy.isLookingLeft = !enemy.isLookingLeft;
     fireMapDidChangeEvent();
+  }
+
+  public int getMapLayerCount() {
+    return 3;
   }
 }
