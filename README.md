@@ -4,16 +4,18 @@ The somewhat clunky editor for [Blubber-Blasen](https://github.com/skerkewitz/bl
 ## How to use it
 
 ### Place and remove solid blocks
+Select the Solid layer in the layer tool.
 * Left mouse will place solid blocks (you can also drag).
 * Right mouse button will remove solid block (you can also drag).
 
 ### Setting up airflow
-* CTRL + SHIFT + A will auto fill the current map with air flow up (will override any current airflow!).
-* Shift left mouse click will place the cursor.
-* The cursor can also moved with the cursor keys.
+Select the airflow layer in the layer tool.
 * Use W, A, S, D key to set airflow at the cursor position.
-* Use SHIFT LMB drag to copy/paint the airflow at the current cursor position to the mouse position.
-* Use SHIFT RMB drag to clear the airflow at the mouse cursor.
+* Left mouse click will place the cursor.
+* The cursor can also moved with the cursor keys.
+* Right mouse button will earse the airflow (you can also drag).
+* Left mouse button draw will clone the airflow at the cursor position to the mouse position.
+* CTRL + SHIFT + A will auto fill the current map with air flow up (will override any current airflow!).
 
 ### Enemies
 * E will place a enemy at the cursor position.
