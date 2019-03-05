@@ -21,6 +21,11 @@ repositories {
     mavenCentral()
 }
 
+compileJava {
+    sourceCompatibility = 1.10
+    targetCompatibility = 1.10
+}
+
 dependencies {
 
     compile 'org.apache.logging.log4j:log4j-core:2.11.2'
